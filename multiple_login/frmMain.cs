@@ -7,22 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
-using MySql.Data.MySqlClient;
 
 namespace multiple_login
 {
-    public partial class Login : Form
+    public partial class frmMain : Form
     {
-        public Login()
+        public frmMain()
         {
             InitializeComponent();
         }
-        MySqlConnection connVar = new MySqlConnection("datasource=localhost;port=3306;username=root;password=;database=multiple;");
 
-        private void button1_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-            }
-            
+
         }
     }
+}
