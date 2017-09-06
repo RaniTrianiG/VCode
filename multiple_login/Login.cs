@@ -18,11 +18,17 @@ namespace multiple_login
         {
             InitializeComponent();
         }
-        MySqlConnection connVar = new MySqlConnection("datasource=localhost;port=3306;username=root;password=;database=multiple;");
+        // MySQL Connection variable, use for connecting to server
+        // using server for best choice
+        MySqlConnection connVar = new MySqlConnection("server=localhost;port=3306;username=root;password=;database=multiple;");
+        
+        // MySQL Command for executing SQL Query using this variable MySqlCommand
+
+        // MySQL Reader for getting data from MySQL Command using this variable MySqlDataReader
 
         private void button1_Click(object sender, EventArgs e)
         {
-            }
-            
+
         }
     }
+}
