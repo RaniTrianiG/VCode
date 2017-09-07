@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace multiple_login
@@ -18,17 +17,43 @@ namespace multiple_login
         {
             InitializeComponent();
         }
-        // MySQL Connection variable, use for connecting to server
-        // using server for best choice
-        MySqlConnection connVar = new MySqlConnection("server=localhost;port=3306;username=root;password=;database=multiple;");
-        
-        // MySQL Command for executing SQL Query using this variable MySqlCommand
+        //MySQl Connection variable, use for connecting server
+        //using server for the best choice
 
-        // MySQL Reader for getting data from MySQL Command using this variable MySqlDataReader
+        string sql = "server=localhost;port=3306;username=root;password=;database=multiple;";
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-
-        }
+            if (txtUsername.Text == "" || txtPassword.Text == "") {
+                MessageBox.Show("Please Provide your password and password!");
+                return;
+            }
+            try {
+                MySqlConnection connVar = new MySqlConnection(sql);
+                MySqlCommand cmd = new MySqlCommand("Select * from account where uname = '" + txtUsername.Text + "' and pwd = '" + txtPassword.Text + "'", connVar);
+                cmd.Parameters.AddWithValue("@uname", txtUsername.Text);
+                cmd.Parameters.AddWithValue("@pwd",txtPassword.Text);
+                connVar.Open();
+                MySqlDataAdapter adapt = new MySqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapt.Fill(ds);
+                connVar.Close();
+                int count = ds.Tables[0].Rows.Count;
+                //if count equal is to 1, than show frmMain form
+                if (count == 1)
+                {
+                    MessageBox.Show("Login Successfull!");
+                    this.Hide();
+                    frmMain fm = new frmMain();
+                    fm.Show();
+                }
+                else {
+                    MessageBox.Show("Login Failed!");
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+       }   
     }
-}
+ }
