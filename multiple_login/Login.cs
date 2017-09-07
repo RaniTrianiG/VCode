@@ -19,40 +19,46 @@ namespace multiple_login
         }
         //MySQl Connection variable, use for connecting server
         //using server for the best choice
-
-        string sql = "server=localhost;port=3306;username=root;password=;database=multiple;";
+        
+        MySqlConnection connVar = new MySqlConnection("server=localhost;port=3306;username=root;password=;database=multiple;");
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtUsername.Text == "" || txtPassword.Text == "") {
+            if (txtUsername.Text == "" || txtPassword.Text == "")
+            {
                 MessageBox.Show("Please Provide your password and password!");
-                return;
             }
-            try {
-                MySqlConnection connVar = new MySqlConnection(sql);
-                MySqlCommand cmd = new MySqlCommand("Select * from account where uname = '" + txtUsername.Text + "' and pwd = '" + txtPassword.Text + "'", connVar);
-                cmd.Parameters.AddWithValue("@uname", txtUsername.Text);
-                cmd.Parameters.AddWithValue("@pwd",txtPassword.Text);
-                connVar.Open();
-                MySqlDataAdapter adapt = new MySqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                adapt.Fill(ds);
-                connVar.Close();
-                int count = ds.Tables[0].Rows.Count;
-                //if count equal is to 1, than show frmMain form
-                if (count == 1)
+            else
+            {
+                try
                 {
-                    MessageBox.Show("Login Successfull!");
-                    this.Hide();
-                    frmMain fm = new frmMain();
-                    fm.Show();
+                    MySqlCommand cmd = new MySqlCommand("Select id,uname,role from account where uname = '" + txtUsername.Text + "' and pwd=sha2('" + txtPassword.Text + "',224)", connVar);
+                    Console.WriteLine(cmd.CommandText);
+                    connVar.Open();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    //connVar.Close();
+                    //if count equal is to 1, than show frmMain form
+                    if (reader.HasRows==true)
+                    {
+                        int role;
+                        reader.Read();
+                        role = reader.GetInt32(2);
+                       
+                        MessageBox.Show("Login Successfull!", "Sukses");
+                        this.Hide();
+                        frmMain fm = new frmMain();
+                        fm.role = role;
+                        fm.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login Failed!");
+                    }
                 }
-                else {
-                    MessageBox.Show("Login Failed!");
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message);
             }
        }   
     }

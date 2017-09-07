@@ -28,26 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblAdmin = new System.Windows.Forms.Label();
-            this.lblUser = new System.Windows.Forms.Label();
+            this.lbl = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblAdmin
+            // lbl
             // 
-            this.lblAdmin.AutoSize = true;
-            this.lblAdmin.Location = new System.Drawing.Point(106, 131);
-            this.lblAdmin.Name = "lblAdmin";
-            this.lblAdmin.Size = new System.Drawing.Size(35, 13);
-            this.lblAdmin.TabIndex = 1;
-            this.lblAdmin.Text = "label1";
-            // 
-            // lblUser
-            // 
-            this.lblUser.Location = new System.Drawing.Point(0, 0);
-            this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(100, 23);
-            this.lblUser.TabIndex = 4;
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(106, 131);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(35, 13);
+            this.lbl.TabIndex = 1;
+            this.lbl.Text = "label1";
             // 
             // btnLogout
             // 
@@ -65,8 +57,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.lblUser);
-            this.Controls.Add(this.lblAdmin);
+            this.Controls.Add(this.lbl);
             this.Name = "frmMain";
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -76,8 +67,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lblAdmin;
-        private System.Windows.Forms.Label lblUser;
+        private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Button btnLogout;
     }
 }

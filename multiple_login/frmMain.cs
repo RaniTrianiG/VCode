@@ -17,6 +17,8 @@ namespace multiple_login
             InitializeComponent();
         }
 
+        public int role=0;
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -26,6 +28,27 @@ namespace multiple_login
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            if (role == 0)
+            {
+                MessageBox.Show("Login Gagal, Silahkan login kembali!");
+                this.Hide();
+                Login lg = new Login();
+                lg.Show();
+            }
+            else if (role == 1)
+            {
+                lbl.Text = "Welcome Admin";
+            }
+            else if (role == 2)
+            {
+                lbl.Text = "Welcome User";
+            }
+            else {
+                MessageBox.Show("Login Gagal, Silahkan login kembali!");
+                this.Hide();
+                Login lg = new Login();
+                lg.Show();
+            }
         }
     }
 }
